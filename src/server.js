@@ -89,10 +89,10 @@ export class BrahmaServer {
 
             if (data.HMDPosition && data.LController && data.RController) {
               // these three are what's used for avatar embodiment
-              interlocutors[data.name].HMDPosition = data.HMDPosition;
-              interlocutors[data.name].LController = data.LController;
-              interlocutors[data.name].RController = data.RController;
-              interlocutors[data.name].lastUpdated = Date.now();
+              this.interlocutors[data.name].HMDPosition = data.HMDPosition;
+              this.interlocutors[data.name].LController = data.LController;
+              this.interlocutors[data.name].RController = data.RController;
+              this.interlocutors[data.name].lastUpdated = Date.now();
               // i used to have code to clear inactive interlocutors
             }
             //&& data.simulationRate
@@ -202,7 +202,7 @@ export class BrahmaServer {
     console.log("BrahmaServer is running...");
 
     // Start the HTTPS server on port 8080
-    this.server.listen(8080, () => {
+    this.server.listen(this.port, () => {
       console.log(`🛜 WebSocket server started on ws://localhost:${this.port}`);
     });
   }
