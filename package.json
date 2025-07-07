@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "generate-docs": "jsdoc -c jsdoc.json",
     "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,13 +31,15 @@
   "author": "Samir Ghosh",
   "license": "MIT",
   "devDependencies": {
-    "all-contributors-cli": "^6.26.1",
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.5",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
+    "all-contributors-cli": "^6.26.1",
+    "docdash": "^2.0.2",
+    "jsdoc": "^4.0.4",
     "rollup": "^4.43.0",
     "three": "^0.177.0"
   },
