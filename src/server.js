@@ -7,14 +7,26 @@ import cors from "cors";
 
 /**
  * @class BrahmaServer
- * @classdesc Real-time WebSocket server for synchronized avatar embodiment and simulation control.
- * 
- * Features:
+ * @classdesc A real-time WebSocket server for synchronized avatar embodiment and simulation control.
+ *
+ * ## Features
  * - Secure HTTPS and WebSocket communication
  * - Real-time avatar data (HMD, controllers, color)
- * - Unique username and color assignment
- * - Active user tracking
- * - Simulation time control and broadcasting
+ * - Unique username and pastel color assignment
+ * - Simulation time control and state broadcasting
+ * - Tracks all active interlocutors
+ *
+ * @example <caption>Create a server file (e.g. index.js)</caption>
+ * import { BrahmaServer } from "brahma-xr-server";
+ *
+ * const server = new BrahmaServer({
+ *   port: 8080,
+ *   certPath: "/path/to/fullchain.pem", // Use Let's Encrypt or self-signed certs
+ *   keyPath: "/path/to/privkey.pem"
+ * });
+ *
+ * server.initialize();
+ * server.run();
  */
 
 export class BrahmaServer {
