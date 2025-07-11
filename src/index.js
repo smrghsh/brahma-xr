@@ -1,5 +1,10 @@
 import * as THREE from 'three';
 
+/**
+ * @class Brahma-XR
+ * @classdesc Core class for initializing Brahma-XR.
+*/
+
 export class Brahma {
   constructor() {
     console.log("Brahma initialized 🚀");
