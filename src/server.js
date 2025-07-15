@@ -6,8 +6,8 @@ import express from "express";
 import cors from "cors";
 
 /**
- * @class BrahmaServer
- * @classdesc A real-time WebSocket server for synchronized avatar embodiment and simulation control.
+ *  BrahmaServer
+ *  A real-time WebSocket server for synchronized avatar embodiment and simulation control.
  *
  * ## Features
  * - Secure HTTPS and WebSocket communication
