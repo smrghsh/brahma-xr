@@ -1,24 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examples</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brahma.js - Examples</title>
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <main>
-    <h2>Examples</h2>
-    <div class="examples-grid">
-      <a class="card" href="./examples/wildfire/src/index.html">
-        <img src="" alt="Wildfire Example" />
-        <h3>Wildfire</h3>
-      </a>
-      <a class="card" href="./examples/Basic/src/index.html">
-        <img src="" alt="Basic Example" />
-        <h3>Basic</h3>
-      </a>
-      
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 300px;
+        background-color: #1e1e1e;
+        color: #fff;
+        padding: 1rem;
+        overflow-y: auto;
+      }
+
+      .sidebar h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #ccc;
+      }
+
+      .example-card {
+        background-color: #2a2a2a;
+        border: 1px solid #444;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: border 0.2s;
+      }
+
+      .example-card.selected,
+      .example-card:hover {
+        border: 1px solid #fff;
+      }
+
+      .example-card img {
+        width: 100%;
+        display: block;
+      }
+
+      .example-card p {
+        margin: 0;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #ccc;
+      }
+
+      .main-preview {
+        flex: 1;
+        background: #e6f2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #example-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Examples</h2>
+      <div id="example-list"></div>
     </div>
-</body>
+
+    <!-- Iframe Viewer -->
+    <div class="main-preview">
+      <iframe id="example-frame" title="Example Viewer"></iframe>
+    </div>
+
+    <script>
+      const exampleList = document.getElementById("example-list");
+      const iframe = document.getElementById("example-frame");
+
+      let examplesData = [];
+
+      function createExampleCard(example) {
+        const card = document.createElement("div");
+        card.classList.add("example-card");
+        card.setAttribute("data-id", example.id);
+        card.setAttribute("data-url", example.url);
+
+        card.innerHTML = `
+        <img src="${example.thumbnail}" alt="${example.title}" />
+        <p>${example.title}</p>
+      `;
+
+        card.addEventListener("click", () => {
+          loadExample(example.id);
+        });
+
+        return card;
+      }
+
+      function loadExample(id) {
+        const example = examplesData.find((e) => e.id === id);
+        if (!example) return;
+
+        iframe.src = example.url;
+        window.history.replaceState(null, "", `#${id}`);
+
+        // Highlight selected card
+        document.querySelectorAll(".example-card").forEach((card) => {
+          card.classList.remove("selected");
+          if (card.getAttribute("data-id") === id) {
+            card.classList.add("selected");
+          }
+        });
+      }
+
+      async function init() {
+        try {
+          const res = await fetch("/examples.json");
+          examplesData = await res.json();
+
+          examplesData.forEach((example) => {
+            const card = createExampleCard(example);
+            exampleList.appendChild(card);
+          });
+
+          // Load from hash or default to first example
+          const isExamplesPage = window.location.pathname.includes("/examples");
+          const hash = isExamplesPage ? window.location.hash.slice(1) : "";
+          const defaultExample = hash || examplesData[0]?.id;
+
+          loadExample(defaultExample);
+        } catch (err) {
+          console.error("Failed to load examples.json:", err);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", init);
+    </script>
+  </body>
 </html>
