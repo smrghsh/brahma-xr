@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wildfire",
+    "title": "Wildfire",
+    "thumbnail": "public/thumbnails/wildfire.png",
+    "url": "/examples/dist/examples/wildfire/index.html"
+  },
+  {
+    "id": "seal",
+    "title": "seal Example",
+    "thumbnail": "public/thumbnails/seal.png",
+    "url": "/examples/dist/examples/seal/index.html"
+  },
+  {
+    "id": "basic",
+    "title": "Basic Example",
+    "thumbnail": "public/thumbnails/basic.png",
+    "url": "/examples/dist/examples/basic/index.html"
+  }
+]
