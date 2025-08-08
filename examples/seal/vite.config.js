@@ -14,7 +14,7 @@ export default {
     https: true,
   },
   build: {
-    outDir: "../docs",
+    outDir: "../../build/seal",
     emptyOutDir: true,
     sourcemap: true,
     minify: false,
