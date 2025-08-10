@@ -3,79 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brahma.js - Examples</title>
+    <title>Brahma- Examples</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      body {
-        margin: 0;
-        font-family: sans-serif;
-        display: flex;
-        height: 100vh;
-      }
-
-      .sidebar {
-        width: 300px;
-        background-color: #1e1e1e;
-        color: #fff;
-        padding: 1rem;
-        overflow-y: auto;
-      }
-
-      .sidebar h2 {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        color: #ccc;
-      }
-
-      .example-card {
-        background-color: #2a2a2a;
-        border: 1px solid #444;
-        margin-bottom: 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        overflow: hidden;
-        transition: border 0.2s;
-      }
-
-      .example-card.selected,
-      .example-card:hover {
-        border: 1px solid #fff;
-      }
-
-      .example-card img {
-        width: 100%;
-        display: block;
-      }
-
-      .example-card p {
-        margin: 0;
-        padding: 0.5rem;
-        font-size: 0.9rem;
-        text-align: center;
-        color: #ccc;
-      }
-
-      .main-preview {
-        flex: 1;
-        background: #e6f2f2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #example-frame {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-    </style>
   </head>
-  <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h2>Examples</h2>
+
+  <body class="examples-page">
+    <div class="panel">
+      <div id="header">
+        <h1 id="panel-title"><a href="index.html">Brahma-XR</a></h1>
+
+        <div id="sections">
+          <span class="selected">Examples</span>
+        </div>
+
+      </div>
+
       <div id="example-list"></div>
     </div>
+
+    <a id="button" target="_blank"><img src="public/codeSnippet.svg" /></a>
 
     <!-- Iframe Viewer -->
     <div class="main-preview">
@@ -85,8 +31,10 @@
     <script>
       const exampleList = document.getElementById("example-list");
       const iframe = document.getElementById("example-frame");
+      const sourceButton = document.getElementById("button");
 
       let examplesData = [];
+      let currentExample = null;
 
       function createExampleCard(example) {
         const card = document.createElement("div");
@@ -110,6 +58,8 @@
         const example = examplesData.find((e) => e.id === id);
         if (!example) return;
 
+        currentExample = example;
+
         iframe.src = example.url;
         window.history.replaceState(null, "", `#${id}`);
 
@@ -121,6 +71,13 @@
           }
         });
       }
+
+      sourceButton.addEventListener("click", () => {
+        const folderName = currentExample.id;
+
+        const githubUrl = `https://github.com/smrghsh/brahma-xr/tree/main/examples/${folderName}`;
+        window.open(githubUrl, "_blank");
+      });
 
       async function init() {
         try {
