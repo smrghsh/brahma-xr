@@ -12,9 +12,9 @@
     "url": "/examples/build/seal/index.html"
   },
   {
-    "id": "basic",
+    "id": "Basic",
     "title": "Basic Example",
     "thumbnail": "public/thumbnails/basic.png",
-    "url": "/examples/build/basic/index.html"
+    "url": "/examples/build/Basic/index.html"
   }
 ]
