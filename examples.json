@@ -2,19 +2,19 @@
   {
     "id": "wildfire",
     "title": "Wildfire",
-    "thumbnail": "public/thumbnails/wildfire.png",
+    "thumbnail": "thumbnails/wildfire.png",
     "url": "/examples/build/wildfire/index.html"
   },
   {
     "id": "seal",
     "title": "seal Example",
-    "thumbnail": "public/thumbnails/seal.png",
+    "thumbnail": "thumbnails/seal.png",
     "url": "/examples/build/seal/index.html"
   },
   {
     "id": "Basic",
     "title": "Basic Example",
-    "thumbnail": "public/thumbnails/basic.png",
+    "thumbnail": "thumbnails/basic.png",
     "url": "/examples/build/Basic/index.html"
   }
 ]
