@@ -16,12 +16,15 @@
           <span class="selected">Examples</span>
         </div>
 
+        <div id="expandButton">☰</div>
       </div>
 
       <div id="example-list"></div>
     </div>
 
-    <a id="button" target="_blank"><img src="public/codeSnippet.svg" /></a>
+    <div id="panelScrim"></div>
+
+    <a id="button" target="_blank"><img src="codeSnippet.svg" /></a>
 
     <!-- Iframe Viewer -->
     <div class="main-preview">
@@ -32,6 +35,9 @@
       const exampleList = document.getElementById("example-list");
       const iframe = document.getElementById("example-frame");
       const sourceButton = document.getElementById("button");
+      const expandButton = document.getElementById("expandButton");
+      const panel = document.querySelector(".panel");
+      const panelScrim = document.getElementById("panelScrim");
 
       let examplesData = [];
       let currentExample = null;
@@ -70,6 +76,8 @@
             card.classList.add("selected");
           }
         });
+
+        panel.classList.remove("open");
       }
 
       sourceButton.addEventListener("click", () => {
@@ -77,6 +85,16 @@
 
         const githubUrl = `https://github.com/smrghsh/brahma-xr/tree/main/examples/${folderName}`;
         window.open(githubUrl, "_blank");
+      });
+
+      expandButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        panel.classList.toggle("open");
+      });
+
+      panelScrim.addEventListener("click", (event) => {
+        event.preventDefault();
+        panel.classList.remove("open");
       });
 
       async function init() {
