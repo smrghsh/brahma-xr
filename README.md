@@ -1,4 +1,5 @@
 # brahma-xr
+## ATTENTION: Library has been MOVED to another [REPOSITORY](github.com/smrghsh/brahma)
 collaborative virtual environments for scientific visualization
 
 Brahma-XR is a library and framework for making collaborative WebXR rooms with spatial data. The same exact code runs in the browser-- and cross operable to Apple Vision Pro, Meta Quest 3, and VARJO. Great for rapid prototyping, and on-the-fly demos. Built off of many people's research and software contributions.
