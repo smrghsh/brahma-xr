@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brahma- Examples</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="examples-page">
+    <div class="panel">
+      <div id="header">
+        <h1 id="panel-title"><a href="index.html">Brahma-XR</a></h1>
+
+        <div id="sections">
+          <span class="selected">Examples</span>
+        </div>
+
+        <div id="expandButton">☰</div>
+      </div>
+
+      <div id="example-list"></div>
+    </div>
+
+    <div id="panelScrim"></div>
+
+    <a id="button" target="_blank"><img src="codeSnippet.svg" /></a>
+
+    <!-- Iframe Viewer -->
+    <div class="main-preview">
+      <iframe id="example-frame" title="Example Viewer"></iframe>
+    </div>
+
+    <script>
+      const exampleList = document.getElementById("example-list");
+      const iframe = document.getElementById("example-frame");
+      const sourceButton = document.getElementById("button");
+      const expandButton = document.getElementById("expandButton");
+      const panel = document.querySelector(".panel");
+      const panelScrim = document.getElementById("panelScrim");
+
+      let examplesData = [];
+      let currentExample = null;
+
+      function createExampleCard(example) {
+        const card = document.createElement("div");
+        card.classList.add("example-card");
+        card.setAttribute("data-id", example.id);
+        card.setAttribute("data-url", example.url);
+
+        card.innerHTML = `
+        <img src="${example.thumbnail}" alt="${example.title}" />
+        <p>${example.title}</p>
+      `;
+
+        card.addEventListener("click", () => {
+          loadExample(example.id);
+        });
+
+        return card;
+      }
+
+      function loadExample(id) {
+        const example = examplesData.find((e) => e.id === id);
+        if (!example) return;
+
+        currentExample = example;
+
+        iframe.src = example.url;
+        window.history.replaceState(null, "", `#${id}`);
+
+        // Highlight selected card
+        document.querySelectorAll(".example-card").forEach((card) => {
+          card.classList.remove("selected");
+          if (card.getAttribute("data-id") === id) {
+            card.classList.add("selected");
+          }
+        });
+
+        panel.classList.remove("open");
+      }
+
+      sourceButton.addEventListener("click", () => {
+        const folderName = currentExample.id;
+
+        const githubUrl = `https://github.com/smrghsh/brahma-xr/tree/main/examples/${folderName}`;
+        window.open(githubUrl, "_blank");
+      });
+
+      expandButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        panel.classList.toggle("open");
+      });
+
+      panelScrim.addEventListener("click", (event) => {
+        event.preventDefault();
+        panel.classList.remove("open");
+      });
+
+      async function init() {
+        try {
+          const res = await fetch("/examples.json");
+          examplesData = await res.json();
+
+          examplesData.forEach((example) => {
+            const card = createExampleCard(example);
+            exampleList.appendChild(card);
+          });
+
+          // Load from hash or default to first example
+          const isExamplesPage = window.location.pathname.includes("/examples");
+          const hash = isExamplesPage ? window.location.hash.slice(1) : "";
+          const defaultExample = hash || examplesData[0]?.id;
+
+          loadExample(defaultExample);
+        } catch (err) {
+          console.error("Failed to load examples.json:", err);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", init);
+    </script>
+  </body>
+</html>

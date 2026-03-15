@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+h1 {
+  font-size: 2em;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.4em;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+}
+
+p,
+li {
+  font-size: 1.2em;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-top: 0.5em;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
+#settings {
+  width: 100vw;
+  text-align: center;
+  margin: 0.1em 0;
+  padding: 0 0;
+}
+#settings > button {
+  font-size: 2em;
+  margin: 10px;
+}
+.webgl {
+  /* position: fixed; */
+  /* top: 0;
+    left: 0; */
+  outline: none;
+  position: absolute;
+  z-index: 0;
+}
+main {
+  position: absolute;
+  /* round corners */
+  border-radius: 10px;
+  margin: 2em;
+  padding: 2em;
+  z-index: 10;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.9);
+  max-width: 500px;
+}
+main > p {
+  margin-top: 0.5em;
+}
+/* main > ol {
+  margin: 0.25em;
+}
+main > ol > li {
+  margin: 0.2em;
+} */
+a {
+  color: aliceblue;
+}
+main > a {
+  margin: 0.2em;
+  /* not inlne */
+  /* display: block; */
+}
+main > a:hover {
+  color: lightblue;
+}
+#login-panel {
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+  color: white;
+  width: 300px;
+  top: 30px; /* 30px margin from the top */
+  left: 30px; /* 30px margin from the left */
+}
+
+.section {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
+.section:last-child {
+  border-bottom: none;
+  margin-top: 20px;
+}
+
+#username {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+#username:focus {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.color-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 10%; /* Rounded corners */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.color-option.selected {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
+  border: 3px solid white;
+}
+
+.pastel-blue {
+  background-color: #a2d2ff;
+}
+.pastel-pink {
+  background-color: #ffafcc;
+}
+.pastel-green {
+  background-color: #caffbf;
+}
+.pastel-yellow {
+  background-color: #ffd6a5;
+}
+.pastel-purple {
+  background-color: #bdb2ff;
+}
+.pastel-orange {
+  background-color: #ffadad;
+}
+
+#login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
